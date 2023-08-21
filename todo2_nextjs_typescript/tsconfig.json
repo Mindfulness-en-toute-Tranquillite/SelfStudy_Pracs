@@ -1,8 +1,7 @@
 {
   "compilerOptions": {
-    "target": "ES6",
+    "target": "es5",
     "lib": ["dom", "dom.iterable", "esnext"],
-    //+ "moduleResolution": "node",
     "allowJs": true,
     "skipLibCheck": true,
     "strict": true,
@@ -19,10 +18,8 @@
         "name": "next"
       }
     ],
-    "baseUrl": ".",
     "paths": {
-      "@/*": ["./src/*"],
-      "@reduxjs/toolkit": ["./node_modules/@reduxjs/toolkit/dist/index.esm.js"]
+      "@/*": ["./src/*"]
     }
   },
   "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx", ".next/types/**/*.ts"],
