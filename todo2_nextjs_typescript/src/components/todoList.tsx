@@ -28,8 +28,8 @@ const TodoList: React.FunctionComponent = () => {
         setTodos(updatedTodos);
     };
     const deleteTodo = (id: number) => {
-        const updatedTodos = todos.filter((todo) => todo.id !== id)
-        setTodos(updatedTodos);
+        const deleteTodos = todos.filter((todo) => todo.id !== id)
+        setTodos(deleteTodos);
     };
 
     return (
@@ -45,10 +45,18 @@ const TodoList: React.FunctionComponent = () => {
                         }}
                     >
                         {todo.text}
-                        <button onClick={() => deleteTodo(todo.id)}>Delete</button>
+                        <button 
+                        key={todo.id}
+                        onClick={(event) => {
+                            event.stopPropagation();
+                            deleteTodo(todo.id)}}
+                            >
+                                Delete
+                                </button>
                     </li>
                 ))}
             </ul>
+            
             <div>
                 <input
                     type="text"
