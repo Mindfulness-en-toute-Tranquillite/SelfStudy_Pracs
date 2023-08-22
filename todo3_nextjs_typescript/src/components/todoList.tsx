@@ -34,17 +34,27 @@ const TodoList: React.FC = () => {
 
     return (
         <div>
+            <input
+                type='text'
+                value={newTodo}
+                onChange= {(event) => setNewTodo(event.target.value)}
+            />
+            <button onClick={addTodo}>Add Todo</button>
+
             <ul>
                 {todos.map((todo)=> (
-                    <li
-                    key={todo.id}
-                    style={{
-                        textDecoration: todo.completed ? 'line-through' : 'none',
-                        cursor:'pointer'
-                    }}
-                    onClick={()=>{toggleTodo(todo.id)}}
-                    >
+                    <li key={todo.id}>
                         {todo.title}
+                        <input
+                            key={todo.id}
+                            style={{
+                                width: '15px', height: '15px',
+                                backgroundColor: todo.completed ? 'black' : 'white',
+                                cursor:'pointer'
+                            }}
+                            readOnly
+                            onClick={()=>{toggleTodo(todo.id)}}
+                        ></input>
                         <button
                         key={todo.id}
                         onClick={(e)=>{
@@ -56,14 +66,6 @@ const TodoList: React.FC = () => {
                     </li>
                 ))}
             </ul>
-            <input
-            type='text'
-            value={newTodo}
-            onChange= {(event) => setNewTodo(event.target.value)}
-            />
-            <button
-            onClick={addTodo}
-            >Add Todo</button>
         </div>
     )
 }
