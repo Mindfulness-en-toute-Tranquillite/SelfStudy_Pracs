@@ -21,6 +21,16 @@ const TodoList: React.FC = () => {
         setTodos([...todos, newTodoItem])
         setNewTodo('')
     };
+    const deleteTodo = (id: number) => {
+        const deleteTodos = todos.filter((todo) => todo.id !== id)
+        setTodos(deleteTodos);
+    }
+    const toggleTodo = (id: number) => {
+        const toggleTodos = todos.map((todo) => 
+        todo.id === id ? {...todo, completed : !todo.completed} : todo
+        );
+        setTodos(toggleTodos);
+    }
 
     return (
         <div>
@@ -29,10 +39,20 @@ const TodoList: React.FC = () => {
                     <li
                     key={todo.id}
                     style={{
-
+                        textDecoration: todo.completed ? 'line-through' : 'none',
+                        cursor:'pointer'
                     }}
+                    onClick={()=>{toggleTodo(todo.id)}}
                     >
                         {todo.title}
+                        <button
+                        key={todo.id}
+                        onClick={(e)=>{
+                            e.stopPropagation()
+                            deleteTodo(todo.id)}}
+                        >
+                            delete
+                        </button>
                     </li>
                 ))}
             </ul>
