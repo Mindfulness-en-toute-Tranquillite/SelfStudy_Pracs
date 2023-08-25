@@ -1,5 +1,6 @@
 import React from "react";
 import { useDispatch, useSelector } from "react-redux";
+import { minusOne, plusOne } from "./redux/modules/counter";
 
 function App() {
   const number = useSelector((state) => state.counter.number);
@@ -9,13 +10,13 @@ function App() {
     <div>
       <button
       onClick={() => {
-        dispatch({type : "MINUS_ONE"});
+        dispatch(minusOne());
       }}
       >-</button>
       {number}
       <button
         onClick={() => {
-          dispatch({type : "PLUS_ONE"});
+          dispatch(plusOne());
         }}
       >+</button>
     </div>
