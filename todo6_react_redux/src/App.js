@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { addTodos } from "./redux/modules/todos";
+import { addTodos, deleteTodos } from "./redux/modules/todos";
 
 function App() {
   const [inputTodo, setInputTodo] = useState('');
@@ -17,6 +17,9 @@ function App() {
       title: inputTodo
     }))
     setInputTodo('')
+  };
+  const onClickDeleteHandler = (id) => {
+    dispatch(deleteTodos(id))
   }
   return (
     <div>
@@ -30,10 +33,18 @@ function App() {
         <button>add</button>
       </form>
       {todos.map((todo)=> (
+        <div>
         <li key={todo.id}>
           {todo.title}
+          <button
+          key={todo.id}
+          onClick={() => onClickDeleteHandler(todo.id)}
+          >delete</button>
         </li>
+        
+        </div>
       ))}
+      
     </div>
   );
 }
