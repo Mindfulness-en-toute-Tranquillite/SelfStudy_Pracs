@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { addTodos, deleteTodos } from "./redux/modules/todos";
+import { addTodos, deleteTodos, toggleTodos } from "./redux/modules/todos";
 
 function App() {
   const [inputTodo, setInputTodo] = useState('');
@@ -14,13 +14,17 @@ function App() {
 
     dispatch(addTodos({
       id: todos.length + 1,
-      title: inputTodo
+      title: inputTodo,
+      complete: false,
     }))
     setInputTodo('')
   };
   const onClickDeleteHandler = (id) => {
     dispatch(deleteTodos(id))
-  }
+  };
+  const onClickToggleHandler = (id) => {
+    dispatch(toggleTodos(id));
+  };
   return (
     <div>
       <h1>Todo List</h1>
@@ -34,7 +38,13 @@ function App() {
       </form>
       {todos.map((todo)=> (
         <div>
-        <li key={todo.id}>
+        <li key={todo.id}
+        style={{
+          cursor : 'pointer',
+          textDecoration: todo.complete ? 'line-through': 'none',
+        }}
+        onClick={() => onClickToggleHandler(todo.id)}
+        >
           {todo.title}
           <button
           key={todo.id}

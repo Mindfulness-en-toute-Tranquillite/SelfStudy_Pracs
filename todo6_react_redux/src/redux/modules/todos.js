@@ -1,5 +1,6 @@
 const ADD_TODOS = "ADD_TODOS";
 const DELETE_TODOS = "DELETE_TODOS";
+const TOGGLE_TODOS = "TOGGLE_TODOS";
 
 export const addTodos = (payload) => {
     return {
@@ -12,11 +13,16 @@ export const deleteTodos = (id) => {
         type: DELETE_TODOS,
         id,
     }
+};
+export const toggleTodos = (id) => {
+    return {
+        type: TOGGLE_TODOS,
+        id,
+    }
 }
 
 const initialState = {
-    todos: [
-    ],
+    todos: [],
 };
 
 const todos = (state=initialState, action) => {
@@ -30,6 +36,12 @@ const todos = (state=initialState, action) => {
             return {
                 ...state,
                 todos : state.todos.filter((todo)=> todo.id !== action.id)
+            };
+        case TOGGLE_TODOS:
+            return {
+                ...state,
+                todos : state.todos.map((todo) => 
+                todo.id === action.id ? {...todo, complete: !todo.complete} : todo ),
             }
         default:
             return state;
