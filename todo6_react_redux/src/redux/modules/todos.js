@@ -1,51 +1,25 @@
-const ADD_TODOS = "ADD_TODOS";
-const DELETE_TODOS = "DELETE_TODOS";
-const TOGGLE_TODOS = "TOGGLE_TODOS";
+import { createSlice } from "@reduxjs/toolkit";
 
-export const addTodos = (payload) => {
-    return {
-        type: ADD_TODOS,
-        payload,
-    }
-};
-export const deleteTodos = (id) => {
-    return {
-        type: DELETE_TODOS,
-        id,
-    }
-};
-export const toggleTodos = (id) => {
-    return {
-        type: TOGGLE_TODOS,
-        id,
-    }
-}
-
-const initialState = {
-    todos: [],
-};
-
-const todos = (state=initialState, action) => {
-    switch (action.type) {
-        case ADD_TODOS: 
-            return {
-                ...state,
-                todos : [...state.todos, action.payload],
-            };
-        case DELETE_TODOS:
-            return {
-                ...state,
-                todos : state.todos.filter((todo)=> todo.id !== action.id)
-            };
-        case TOGGLE_TODOS:
-            return {
-                ...state,
-                todos : state.todos.map((todo) => 
-                todo.id === action.id ? {...todo, complete: !todo.complete} : todo ),
+const todosSlice = createSlice({
+    name: "todos",
+    initialState: {
+        todos: [],
+    },
+    reducers: {
+        addTodos: (state, action) => {
+            state.todos.push(action.payload);
+        },
+        deleteTodos: (state, action) => {
+            state.todos = state.todos.filter((todo) => todo.id !== action.payload);
+        },
+        toggleTodos: (state, action) => {
+            const todo = state.todos.find((todo) => todo.id === action.payload );
+            if (todo) {
+                todo.complete = !todo.complete;
             }
-        default:
-            return state;
-    }
-};
+        },
+    },
+});
 
-export default todos;
+export const {addTodos, deleteTodos, toggleTodos} = todosSlice.actions;
+export default todosSlice.reducer;
