@@ -9,6 +9,14 @@ const todosSlice = createSlice({
         addTodos: (state, action) => {
             state.todos.push(action.payload);
         },
+        deleteTodos: (state, action) => {
+            state.todos.filter((todo) => todo.id !== action.payload);
+        },
+        toggleTodos: (state, action) => {
+            const todo = state.todos.find((todo) => todo.id === action.payload)
+            if (todo)
+            todo.complete = !todo.complete
+        }
     },
 })
 
