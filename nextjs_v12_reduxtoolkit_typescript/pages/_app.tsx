@@ -1,11 +1,14 @@
 import store from '@/redux/config/configStore'
 import type { AppProps } from 'next/app'
+import React from 'react'
 import { Provider } from 'react-redux'
 
-export default function App({ Component, pageProps }: AppProps) {
+const App: React.FC<AppProps> = ({ Component, pageProps }: AppProps) => {
   return (
   <Provider store={store}>
     <Component {...pageProps} />
   </Provider>
   )
 }
+
+export default App;

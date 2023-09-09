@@ -1,3 +1,4 @@
+import { RootState } from "@/redux/config/configStore";
 import { addTodos, deleteTodos, toggleTodos } from "@/redux/modules/todosSlice";
 import React, { SyntheticEvent } from "react";
 import { useState } from "react";
@@ -10,7 +11,7 @@ interface Todo {
 }
 
 export default function Home() {
-  const todos = useSelector((state: any) => state.todosSlice.todos);
+  const todos = useSelector((state: RootState) => state.todosSlice.todos);
   console.log("todos",todos)
   const [inputText, setInputText] = useState<string>('');
   const dispatch = useDispatch();
