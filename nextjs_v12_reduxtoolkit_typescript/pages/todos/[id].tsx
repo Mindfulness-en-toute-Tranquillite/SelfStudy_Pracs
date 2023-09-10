@@ -3,6 +3,6 @@ interface Detail {
     text: string;
 }
 
-export default function detail(){
+export default function Detail(){
 
 }
